@@ -51,10 +51,10 @@
               </div> -->
               
               
-              <h4 class="card-title text-white  " style="font-family:  serif"  >Hello {{user_info.username}}, Phone No:{{user_info.phone_number}} </h4>
+              <h4 class="card-title text-white  " style="font-family:  serif"  >Hello {{user_info.username}},<br> Phone No:{{user_info.phone_number}} </h4>
               <p class="card-text text-white" ><h5 class="text-white">Are you sure that you want to book  <u>Slot {{booking_info.slot_time}}:00 hrs</u> on <u>{{booking_info.date}}</u> at "{{booking_info.ground_name}}"</h5></p>
               <form name="login" method="post" action=""> 
-                <a href="/booking/{{user_info.phone_number}}" class="btn btn-outline-danger me-2">back</a>
+                <a href="javascript:history.back()" class="btn btn-outline-danger me-2">back</a>
                 <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-info me-2">Confirm Booking</button>
                 <!-- <a class="card-text" href="/booking/{{date}}" ><button class="btn btn-outline-info me-2" type="button">Book Simpliz Turf</button></a> -->
                 {% csrf_token %}   

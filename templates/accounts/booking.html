@@ -29,11 +29,11 @@
       <br>
       <br>
         <div class="d-flex justify-content-between">
-          <a class="btn btn-info right mr-2" href="{% url 'booking' phone previous_date %}"> <b>Previous</b> </a>    
-          <a class="btn btn-info right mr-2" href="{% url 'booking' phone today_date %}"> <b>Today</b> </a>
-          <a class="btn btn-info right mr-2" href="{% url 'booking' phone next_date %}"> <b>Next >></b> </a>
+          <a class="btn btn-info right mr-2" href="{% url 'booking' phone ground_name previous_date %}"> <b>Previous</b> </a>    
+          <a class="btn btn-info right mr-2" href="{% url 'booking' phone ground_name today_date %}"> <b>Today</b> </a>
+          <a class="btn btn-info right mr-2" href="{% url 'booking' phone ground_name next_date %}"> <b>Next >></b> </a>
         </div>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -44,10 +44,10 @@
           </script> 
         <p>Date: <input type="text" id="datepicker"></p>
         <form name="login" method="post" action=""> 
-          <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-primary me-2"><b>Book Simpliz Turf</b></button>
-          <!-- <a class="card-text" href="/booking/{{date}}" ><button class="btn btn-outline-info me-2" type="button">Book Simpliz Turf</button></a> -->
+          <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-primary me-2"><b>check</b></button>
+          <a class="card-text" href="/booking/{{date}}" ><button class="btn btn-outline-info me-2" type="button">Book Simpliz Turf</button></a> 
           {% csrf_token %}   
-          </form>
+          </form> -->
        
       <div class="d-flex justify-content-center">{{ current_date }}</div>
      
@@ -61,7 +61,7 @@ background: linear-gradient(135deg, var(--bg) 25%, transparent 25%) -50px 0,
   linear-gradient(45deg, var(--bg) 25%, transparent 25%);
 background-size: 100px 100px;
 background-color: var(--stripe);" class="card bg-glass " style="color: blueviolet;">
-  <div class="card-body px-5 py-5 px-md-5">
+  <div class="card-body px-5 py-2 px-md-5">
   
   <table class="table  text-center ">
     <thead bgcolor="#0dcaf0">

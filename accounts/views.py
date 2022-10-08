@@ -11,6 +11,10 @@ from .utility import gen_next_date,gen_previous_date,gen_today
 from django.contrib import messages
 import requests
 from .tasks import send_confirmation
+import os
+import twilio
+from twilio.rest import Client
+
 #from django_celery_beat.models import PeriodicTask, CrontabSchedule
 import json
 from accounts.tasks import send_confirmation
@@ -21,25 +25,44 @@ def send_otp(request):
     if request.method== 'POST':
         user_name =  request.POST.get('username')
         phone =  request.POST.get('phone_number')
-        otp_in=send_otp_to_phone(phone)
-        print(user_name)
-        print(phone)
-        
-        try:
-            user = User.objects.create_user(
-            username= request.POST.get('username'),
-            phone_number = request.POST.get('phone_number'),
-            otp=otp_in
-        )
-        except Exception as e:
-            return render(request,'accounts/login.html')
-        
-        print("user created")
-        user.set_password("Adonis1234@")
-        user.save()
-        print("otp sent")
-        print("phone number is ",phone,user_name)
-        return redirect('verifyotp',phone=phone)
+        if User.objects.filter(phone_number=phone).exists() and User.objects.get(phone_number=phone).is_phone_verified==True:
+            # user=User.objects.get(phone_number=phone)
+            # if user.is_phone_verified==True:
+                
+            return redirect('dashbord',phone)
+            
+            
+            
+        else:
+            otp_in=send_otp_to_phone(phone)
+            print(user_name)
+            print(phone)
+            
+            try:
+                print("trying to create user")
+                user = User.objects.create_user(
+                username= request.POST.get('username'),
+                phone_number = request.POST.get('phone_number'),
+                otp=otp_in
+            )
+            except Exception as e:
+                # try:
+                    
+                #     if user.is_phone_verified == True:
+                #         context={"phone":phone}
+                #         return redirect('dashbord',context) 
+                # except Exception as e:
+                    user=User.objects.get(phone_number=phone)
+                    user.delete()
+                    print("previous user deleted")
+                    return redirect('login')
+            
+            print("user created")
+            user.set_password("Adonis1234@")
+            user.save()
+            print("otp sent")
+            print("phone number is ",phone,user_name)
+            return redirect('verifyotp',phone=phone)
         #return render(request,'accounts/verifyotp.html',{"phone_number":phone,"otp":otp, "username":user_name})
     return render(request,'accounts/login.html')
 
@@ -47,7 +70,7 @@ def send_otp(request):
 def verify_otp(request,phone):
     try:
         User.objects.get(phone_number=phone)
-        print('not found')
+        print('found')
     except Exception as e:
             return redirect('login')
     phone_num=str(phone)
@@ -74,6 +97,22 @@ def verify_otp(request,phone):
     return render(request,'accounts/verifyotp.html')
 
     
+# def dashbord(request,phone):
+#     try:
+#         User.objects.get(phone_number=phone)
+#         print('not found')
+#     except Exception as e:
+#             return redirect('login')
+#     print("inside dashbord")
+#     if request.method=='POST':
+#         print("inside dashbord  post function")
+#         date_today =str(date.today())
+#         date_str=date_today[0]+date_today[1]+date_today[2]+date_today[3]+date_today[5]+date_today[6]+date_today[8]+date_today[9]
+#         print(date_str)
+#         return redirect('booking',phone,date_str)
+#     context={"phone":phone}
+#     return render(request,'accounts/dashbord.html',context)
+    
 def dashbord(request,phone):
     try:
         User.objects.get(phone_number=phone)
@@ -81,16 +120,15 @@ def dashbord(request,phone):
     except Exception as e:
             return redirect('login')
     print("inside dashbord")
-    if request.method=='POST':
-        print("inside dashbord  post function")
-        date_today =str(date.today())
-        date_str=date_today[0]+date_today[1]+date_today[2]+date_today[3]+date_today[5]+date_today[6]+date_today[8]+date_today[9]
-        print(date_str)
-        return redirect('booking',phone,date_str)
-    context={"phone":phone}
+    
+    print("inside dashbord  post function")
+    date_today =str(date.today())
+    date_str=date_today[0]+date_today[1]+date_today[2]+date_today[3]+date_today[5]+date_today[6]+date_today[8]+date_today[9]
+    print(date_str)
+    context={"phone":phone,"ground_name1":"SIMPLIZ TURF","ground_name2":"Test","date_today":date_str}
     return render(request,'accounts/dashbord.html',context)
 
-def booking(request,phone,date=date.today()):
+def booking(request,phone,ground_name,date=date.today()):
     try:
         User.objects.get(phone_number=phone)
         print('not found')
@@ -103,7 +141,7 @@ def booking(request,phone,date=date.today()):
         f=booking_info.objects.get_or_create(
         date=date_manipulated,
         slot_time= i,
-        ground_name="SIMPLIZ TURF"
+        ground_name=ground_name
         )   
     Slot_Details=booking_info.objects.filter(date=date_manipulated)
     print(date_manipulated)
@@ -115,7 +153,7 @@ def booking(request,phone,date=date.today()):
         is_book="available"
     else:
         is_book="Not Available"
-    context={'current_date':date_manipulated,"previous_date":prev_date,"next_date":next_date,"today_date":ttoday,'status': Slot_Details, "phone":phone}
+    context={'current_date':date_manipulated,"previous_date":prev_date,"next_date":next_date,"today_date":ttoday,'status': Slot_Details, "phone":phone, "ground_name":ground_name}
     
     return render(request,'accounts/booking.html',context)
 
@@ -142,7 +180,17 @@ def bookingconfirm(request,phone,id):
         # headers = {}
 
         # response = requests.request("POST", url, headers=headers, data=payload)
+        account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+        auth_token ='ab0580cff493982fbd9f023c0e67356c'
+        client = Client(account_sid, auth_token)
 
+        message = client.messages.create(
+                                    body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+                                    from_='+1 205 691 3855',
+                                    to='+918625877270'
+                                    )
+
+        print(message.sid)
 
 
         return redirect('dashbord',phone)

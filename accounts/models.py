@@ -25,6 +25,6 @@ class booking_info(models.Model):
     ground_name=models.CharField(max_length=30)
 
     def __str__(self):
-        return '{} {} {}'.format(str(self.slot_time), str(self.date), str(self.ground_name))
+        return '{} {} {} {}'.format(str(self.slot_time), str(self.date), str(self.ground_name),str(self.phone_no_registered))
         
 
