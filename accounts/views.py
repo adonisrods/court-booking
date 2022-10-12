@@ -14,7 +14,7 @@ from .tasks import send_confirmation
 import os
 import twilio
 from twilio.rest import Client
-
+from django.contrib import messages
 #from django_celery_beat.models import PeriodicTask, CrontabSchedule
 import json
 from accounts.tasks import send_confirmation
@@ -90,7 +90,7 @@ def verify_otp(request,phone):
             return redirect('dashbord',phone)
         else:
             print("invalid otp")
-            
+            messages.info(request, 'invalid otp')
             # obj=User.objects.get(phone_number=phone)
             # obj.delete()
         
@@ -181,12 +181,12 @@ def bookingconfirm(request,phone,id):
 
         # response = requests.request("POST", url, headers=headers, data=payload)
         account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-        auth_token ='ab0580cff493982fbd9f023c0e67356c'
+        auth_token ='4b53a4c3bc0426e132cad5ca18922608'
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
                                     body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-                                    from_='+1 205 691 3855',
+                                    from_='+12056913855',
                                     to='+918625877270'
                                     )
 
