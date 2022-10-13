@@ -176,24 +176,24 @@ def bookingconfirm(request,phone,id):
         f.phone_no_registered=phone
         f.is_booked=True 
         f.save()
-        # send_confirmation(p,f)
-        # # url = "https://2factor.in/API/R1/"
+        send_confirmation(p,f)
+        # url = "https://2factor.in/API/R1/"
 
-        # # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
-        # # headers = {}
+        # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
+        # headers = {}
 
-        # # response = requests.request("POST", url, headers=headers, data=payload)
-        # account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-        # auth_token ='4b53a4c3bc0426e132cad5ca18922608'
-        # client = Client(account_sid, auth_token)
+        # response = requests.request("POST", url, headers=headers, data=payload)
+        account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+        auth_token ='449fa052023cef80aa7a4e78d75861ee'
+        client = Client(account_sid, auth_token)
 
-        # message = client.messages.create(
-        #                             body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-        #                             from_='+12056913855',
-        #                             to='+918625877270'
-        #                             )
-
-        # print(message.sid)
+        message = client.messages.create(
+                                    body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+                                    from_='+1 205 691 3855',
+                                    to='+918625877270'
+                                    )
+        messages.info(request, 'Booking Successfull!')
+        print(message.sid)
 
 
         return redirect('dashbord',phone)
