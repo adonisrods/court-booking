@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Book Court</title>
+    {% load static %}
+      <link rel = "icon" href ={% static 'logo.jpg' %}   type = "image/x-icon" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   </head>
   <body style="background-image: radial-gradient(circle, #e1e1e1, #e1e1e1, #e1e1e1)">
-    <div class="fixed-top">
-    <nav class="navbar bg-dark bg-opacity-80 py-0">
+    <div class="fixed-top flex-column">
+      <nav class="navbar bg-dark bg-opacity-80 py-0">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'dashbord' phone  %}">
-            <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="20" height="30" class="d-inline-block align-text-top">
+            <img src="{% static 'logo.jpg' %}" alt="" width="20" height="30" class="d-inline-block align-text-top">
             <h7 style="color:rgb(177, 228, 235); font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" > &nbsp; Booking WebSite</h7>
           </a>
           <div class="d-flex flex-row-reverse">
@@ -75,13 +77,17 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
     {% for i in status%}
     <tbody class="table-dark">
       <tr>
-        <th scope="row">{{i.slot_time}}:00</th>
+        <th scope="row"><h5><b>{{i.slot_time}}:00</b></h5></th>
         
         <td>
-          {% if i.is_booked is False %}
-          <a class="card-text" href="/bookingconfirm/{{phone}}/{{i.id}}" ><button class="btn btn-outline-info me-2" type="button">Book</button></a>
-        
-          {% else %}
+          {% if i.is_booked is False  %}
+            {% if i.phone_number_registered == none  %}
+              <a class="card-text" href="/bookingconfirm/{{phone}}/{{i.id}}" ><button class="btn btn-outline-info me-2" type="button">Book</button></a>
+            {% endif %}
+
+          {% elif i.phone_no_registered == phone  %}
+            <a class="card-text" href="/cancelconfirm/{{phone}}/{{i.id}}" ><button class="btn btn-outline-danger me-2" type="button">Cancel</button></a>
+           {% else %}
           <h5>Not Available</h5>
 
           {% endif %}

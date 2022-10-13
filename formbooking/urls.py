@@ -23,5 +23,6 @@ urlpatterns = [
     re_path(r'^verifyotp/(?P<phone>\d+)/',verify_otp,name="verifyotp"),
     re_path(r'^dashbord/(?P<phone>\d+)/',dashbord, name="dashbord"),
     re_path(r'^booking/(?P<phone>\d+)/(?P<ground_name>\D+)/(?P<date>\d+)/',booking,name="booking"),
-    re_path(r'^bookingconfirm/(?P<phone>\d+)/(?P<id>\d+)/',bookingconfirm,name="bookingconfirm")
+    re_path(r'^bookingconfirm/(?P<phone>\d+)/(?P<id>\d+)/',bookingconfirm,name="bookingconfirm"),
+    re_path(r'^cancelconfirm/(?P<phone>\d+)/(?P<id>\d+)/',cancelconfirm,name="cancelconfirm")
 ]

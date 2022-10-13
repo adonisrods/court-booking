@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
@@ -15,6 +16,8 @@ import os
 import twilio
 from twilio.rest import Client
 from django.contrib import messages
+
+from django.utils.safestring import mark_safe
 #from django_celery_beat.models import PeriodicTask, CrontabSchedule
 import json
 from accounts.tasks import send_confirmation
@@ -90,7 +93,7 @@ def verify_otp(request,phone):
             return redirect('dashbord',phone)
         else:
             print("invalid otp")
-            messages.info(request, 'invalid otp')
+            messages.info(request, 'Invalid OTP!')
             # obj=User.objects.get(phone_number=phone)
             # obj.delete()
         
@@ -173,24 +176,24 @@ def bookingconfirm(request,phone,id):
         f.phone_no_registered=phone
         f.is_booked=True 
         f.save()
-        send_confirmation(p,f)
-        # url = "https://2factor.in/API/R1/"
+        # send_confirmation(p,f)
+        # # url = "https://2factor.in/API/R1/"
 
-        # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
-        # headers = {}
+        # # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
+        # # headers = {}
 
-        # response = requests.request("POST", url, headers=headers, data=payload)
-        account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-        auth_token ='4b53a4c3bc0426e132cad5ca18922608'
-        client = Client(account_sid, auth_token)
+        # # response = requests.request("POST", url, headers=headers, data=payload)
+        # account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+        # auth_token ='4b53a4c3bc0426e132cad5ca18922608'
+        # client = Client(account_sid, auth_token)
 
-        message = client.messages.create(
-                                    body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-                                    from_='+12056913855',
-                                    to='+918625877270'
-                                    )
+        # message = client.messages.create(
+        #                             body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+        #                             from_='+12056913855',
+        #                             to='+918625877270'
+        #                             )
 
-        print(message.sid)
+        # print(message.sid)
 
 
         return redirect('dashbord',phone)
@@ -198,3 +201,44 @@ def bookingconfirm(request,phone,id):
     p=User.objects.get(phone_number=phone)
     context={"booking_info": f ,"user_info":p}
     return render(request,'accounts/bookingconfirm.html',context)
+
+def cancelconfirm(request,phone,id):
+    try:
+        User.objects.get(phone_number=phone)
+        print('not found')
+    except Exception as e:
+            return redirect('login')
+    print("inside booking confirmation")
+    if request.method=='POST':
+        print("inside cancel confirmation post method")
+        f=booking_info.objects.get(id=id)
+        print(f.slot_time)
+        p=User.objects.get(phone_number=phone)
+        f.phone_no_registered=NULL
+        f.is_booked=False 
+        f.save()
+        # send_confirmation(p,f)
+        # # url = "https://2factor.in/API/R1/"
+
+        # # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
+        # # headers = {}
+
+        # # response = requests.request("POST", url, headers=headers, data=payload)
+        # account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+        # auth_token ='4b53a4c3bc0426e132cad5ca18922608'
+        # client = Client(account_sid, auth_token)
+
+        # message = client.messages.create(
+        #                             body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+        #                             from_='+12056913855',
+        #                             to='+918625877270'
+        #                             )
+
+        # print(message.sid)
+
+
+        return redirect('dashbord',phone)
+    f=booking_info.objects.get(id=id)
+    p=User.objects.get(phone_number=phone)
+    context={"booking_info": f ,"user_info":p}
+    return render(request,'accounts/cancelconfirm.html',context)
