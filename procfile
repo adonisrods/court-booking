@@ -1,1 +1,1 @@
-web: gunicornn manage:accounts --logfile
+web: gunicornn manage:app --preload
