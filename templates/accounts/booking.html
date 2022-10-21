@@ -50,8 +50,8 @@
           <a class="card-text" href="/booking/{{date}}" ><button class="btn btn-outline-info me-2" type="button">Book Simpliz Turf</button></a> 
           {% csrf_token %}   
           </form> -->
-       
-      <div class="d-flex justify-content-center">{{ current_date }}</div>
+       <br>
+      <div class="d-flex justify-content-center" style="font-family:'Andale Mono', 'monospace'"><b>{{ current_date }}</b></div>
      
     </div>
 <div style="--stripe: #cfd8dc;
@@ -69,7 +69,7 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
     <thead bgcolor="#0dcaf0">
       <tr >
         <th scope="col" ><h3></h3>SLOT</th>
-        
+        <th scope="col" ><h3></h3>DURATION</th>
         <th scope="col">STATUS</th>
         
       </tr>
@@ -77,8 +77,10 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
     {% for i in status%}
     <tbody class="table-dark">
       <tr>
-        <th scope="row"><h5><b>{{i.slot_time}}:00</b></h5></th>
         
+
+        <th scope="row"><h5><b>{{i.slot_time}}:00</b></h5></th>
+        <td><h5><b>1 Hour</b></h5></td>
         <td>
           {% if i.is_booked is False  %}
             {% if i.phone_number_registered == none  %}
@@ -89,7 +91,7 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
             <a class="card-text" href="/cancelconfirm/{{phone}}/{{i.id}}" ><button class="btn btn-outline-danger me-2" type="button">Cancel</button></a>
            {% else %}
           <h5>Not Available</h5>
-
+          
           {% endif %}
         
           
