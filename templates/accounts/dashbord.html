@@ -380,11 +380,12 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'dashbord' phone  %}">
             <img src="{% static 'logo.jpg' %}" alt="" width="20" height="30" class="d-inline-block align-text-top">
-            <h7 style="color:rgb(177, 228, 235); font-family:'Times New Roman'," > &nbsp; Booking WebSite</h7>
+            <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+            <h7 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';font-size: 22px;" > &nbsp; Booking WebSite</h7>
           </a>
-          <div class="d-flex flex-row-reverse text-end">
-            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger me-2" type="button">Logout</button></a></div>
-            <div class="p-2" style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235); font-family:Garamond;">{{phone}}</h5></div>
+          <div class="d-flex flex-row-reverse">
+            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger me-2 " type="button">Logout</button></a></div>
+            <div class="p-2" style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{phone}}</h5></div>
           </div>
           
         </div>
@@ -398,7 +399,7 @@
       <div class="d-flex justify-content-center">
       <div class="row row-cols-1 row-cols-md-1 g-4 px-4 py-2 px-md-5 " >
         <div class="col"></div>
-          <div class="card mb-3 text-center animate fadeInRight one " style="max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #0d6efd;">
+          <div class="card mb-3 text-center animate fadeInRight one " style="max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #0d6efd; box-shadow: rgba(9, 9, 9, 0.190) 3px 3px 20px 12px; ">
             <div class="row g-0" >
               <div class="col-md-4" >
                 <br>
@@ -410,7 +411,7 @@
               <div class="col-md-8">
               <div class="card-body">
               <h5 class="card-title " style="color:#e1e1e1">SIMPLIZ TURF</h5>
-              <p class="card-text" style="color:#e1e1e1">Bookings for simpliz turf. Located at Chandor,salcette Goa.</p>
+              <p class="card-text" style="color:#e1e1e1">Bookings for Simpliz Turf. Located at Chandor,salcette Goa.</p>
               
               <a class="btn btn-outline-info me-2" href="{% url 'booking' phone ground_name1 date_today  %}"><b>Book Simpliz Turf</b></a>
             </div>

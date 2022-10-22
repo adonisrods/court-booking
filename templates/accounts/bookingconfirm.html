@@ -29,11 +29,12 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="/dashbord/{{user_info.phone_number}}">
             <img src="{% static 'logo.jpg' %}" alt="" width="20" height="30" class="d-inline-block align-text-top">
-            <h7 style="color:rgb(177, 228, 235); font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" > &nbsp; Booking WebSite</h7>
+            <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+            <h7 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';font-size: 22px;" > &nbsp; Booking WebSite</h7>
           </a>
           <div class="d-flex flex-row-reverse">
-            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger me-2" type="button">Logout</button></a></div>
-            <div class="p-2" style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235); font-family:Garamond;">{{user_info.phone_number}}</h5></div>
+            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger me-2 " type="button">Logout</button></a></div>
+            <div class="p-2" style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user_info.phone_number}}</h5></div>
           </div>
         
         </div>
@@ -46,7 +47,7 @@
       <br>
       <div class="row row-cols-1 row-cols-md-3 g-4"  >
         <div class="col "></div>
-          <div class="card mb-3 text-center " style="  max-width: 25rem;background-color: #162937;border-width: 0.05cm;border-color: #0d6efd; padding: 1cm;">
+          <div class="card mb-3 text-center " style="  max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #0d6efd; padding: 1cm; box-shadow: rgba(9, 9, 9, 0.190) 3px 3px 20px 12px;">
             
               <!-- <div class="col-md-4"
                 <br>
@@ -57,8 +58,9 @@
               </div> -->
               
               
-              <h4 class="card-title text-white  " style="font-family:  serif"  >Hello {{user_info.username}},<br> Phone No:{{user_info.phone_number}} </h4>
-              <p class="card-text text-white" ><h5 class="text-white">Are you sure that you want to book  <u>Slot {{booking_info.slot_time}}:00 hrs</u> on <u>{{booking_info.date}}</u> at "{{booking_info.ground_name}}"</h5></p>
+              <h4 class="card-title text-white  " style="font-family:  serif"  >Hello {{user_info.username}},<br> </h4>
+              
+              <p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 hrs on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p>
               <form name="login" method="post" action=""> 
                 <a href="javascript:history.back()" class="btn btn-outline-danger me-2">back</a>
                 <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-info me-2">Confirm Booking</button>

@@ -183,24 +183,31 @@ def bookingconfirm(request,phone,id):
         # headers = {}
 
         # response = requests.request("POST", url, headers=headers, data=payload)
-        account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-        auth_token ='449fa052023cef80aa7a4e78d75861ee'
-        client = Client(account_sid, auth_token)
+        try:
+            account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+            auth_token ='449fa052023cef80aa7a4e78d75861ee'
+            client = Client(account_sid, auth_token)
 
-        message = client.messages.create(
-                                    body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-                                    from_='+1 205 691 3855',
-                                    to='+918625877270'
-                                    )
-        messages.info(request, 'Booking Successfull!')
-        print(message.sid)
-
+            message = client.messages.create(
+                                        body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+                                        from_='+1 205 691 3855',
+                                        to='+918625877270'
+                                        )
+            messages.info(request, 'Booking Successfull!')
+            print(message.sid)
+        except Exception as e:
+            return redirect('booked',phone)
 
         return redirect('dashbord',phone)
     f=booking_info.objects.get(id=id)
     p=User.objects.get(phone_number=phone)
     context={"booking_info": f ,"user_info":p}
     return render(request,'accounts/bookingconfirm.html',context)
+
+def booked(request,phone):
+    context={'phone':phone}
+    return render(request,'accounts/booked.html',context)
+
 
 def cancelconfirm(request,phone,id):
     try:
