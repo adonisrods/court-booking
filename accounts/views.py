@@ -170,35 +170,40 @@ def bookingconfirm(request,phone,id):
     print("inside booking confirmation")
     if request.method=='POST':
         print("inside booking confirmation post method")
+
         f=booking_info.objects.get(id=id)
-        print(f.slot_time)
-        p=User.objects.get(phone_number=phone)
-        f.phone_no_registered=phone
-        f.is_booked=True 
-        f.save()
-        send_confirmation(p,f)
-        # url = "https://2factor.in/API/R1/"
+        if f.is_booked == False:
+            print(f.slot_time)
+            p=User.objects.get(phone_number=phone)
+            f.phone_no_registered=phone
+            f.is_booked=True 
+            f.save()
+            send_confirmation(p,f)
+        
+            # url = "https://2factor.in/API/R1/"
 
-        # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
-        # headers = {}
+            # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
+            # headers = {}
 
-        # response = requests.request("POST", url, headers=headers, data=payload)
-        try:
-            account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-            auth_token ='449fa052023cef80aa7a4e78d75861ee'
-            client = Client(account_sid, auth_token)
+            # response = requests.request("POST", url, headers=headers, data=payload)
+            try:
+                account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+                auth_token ='449fa052023cef80aa7a4e78d75861ee'
+                client = Client(account_sid, auth_token)
 
-            message = client.messages.create(
-                                        body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-                                        from_='+1 205 691 3855',
-                                        to='+918625877270'
-                                        )
-            messages.info(request, 'Booking Successfull!')
-            print(message.sid)
-        except Exception as e:
-            return redirect('booked',phone)
-
-        return redirect('dashbord',phone)
+                message = client.messages.create(
+                                            body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+                                            from_='+1 205 691 3855',
+                                            to='+918625877270'
+                                            )
+                messages.info(request, 'Booking Successfull!')
+                print(message.sid)
+                return redirect('booked',phone)
+            except Exception as e:
+                return redirect('booked',phone)
+        else:
+            return redirect('already_booked',phone)
+        
     f=booking_info.objects.get(id=id)
     p=User.objects.get(phone_number=phone)
     context={"booking_info": f ,"user_info":p}
@@ -208,6 +213,9 @@ def booked(request,phone):
     context={'phone':phone}
     return render(request,'accounts/booked.html',context)
 
+def already_booked(request,phone):
+    context={'phone':phone}
+    return render(request,'accounts/already_booked.html',context)
 
 def cancelconfirm(request,phone,id):
     try:
