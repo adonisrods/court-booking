@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from turtle import hideturtle
 # import django_heroku
 # import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -158,3 +159,4 @@ DEFAULT_FROM_EMAIL = 'Celery <adonis.virtualwebs@gmail.com>'
 import django_heroku
 
 django_heroku.settings(locals())
+print("hi")
