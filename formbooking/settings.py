@@ -159,4 +159,3 @@ DEFAULT_FROM_EMAIL = 'Celery <adonis.virtualwebs@gmail.com>'
 import django_heroku
 
 django_heroku.settings(locals())
-print("hi")
