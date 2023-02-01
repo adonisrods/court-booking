@@ -1,70 +1,42 @@
 
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .helpers import  send_otp_to_phone
+from .helpers import  send_otp_to_email
 from .models import User,booking_info
-from django.http import HttpRequest
-from django.http import HttpResponse
-from datetime import datetime, timedelta
 from .utility import gen_next_date,gen_previous_date,gen_today
-from django.contrib import messages
-import requests
-from .tasks import send_confirmation
-import os
-import twilio
 from twilio.rest import Client
 from django.contrib import messages
-
-from django.utils.safestring import mark_safe
-#from django_celery_beat.models import PeriodicTask, CrontabSchedule
-import json
-from accounts.tasks import send_confirmation
+from accounts.tasks import send_confirmation,send_cancel_confirmation
 # Create your views here.
 from datetime import date
 @api_view(['GET', 'POST'])
 def send_otp(request):
-    if request.method== 'POST':
-        user_name =  request.POST.get('username')
-        phone =  request.POST.get('phone_number')
+    if request.method=='POST':
+        user_name = request.POST.get('username')
+        phone = request.POST.get('phone_number')
+        email = request.POST.get('email')
         if User.objects.filter(phone_number=phone).exists() and User.objects.get(phone_number=phone).is_phone_verified==True:
-            # user=User.objects.get(phone_number=phone)
-            # if user.is_phone_verified==True:
-                
             return redirect('dashbord',phone)
             
             
             
         else:
-            otp_in=send_otp_to_phone(phone)
-            print(user_name)
-            print(phone)
-            
+            otp_in=send_otp_to_email(phone)
             try:
-                print("trying to create user")
                 user = User.objects.create_user(
-                username= request.POST.get('username'),
-                phone_number = request.POST.get('phone_number'),
+                username= user_name,
+                phone_number = phone,
+                email = email,
                 otp=otp_in
+
             )
             except Exception as e:
-                # try:
-                    
-                #     if user.is_phone_verified == True:
-                #         context={"phone":phone}
-                #         return redirect('dashbord',context) 
-                # except Exception as e:
-                    user=User.objects.get(phone_number=phone)
-                    user.delete()
-                    print("previous user deleted")
-                    return redirect('login')
-            
-            print("user created")
+                user=User.objects.get(phone_number=phone)
+                user.delete()
+                return redirect('login')
             user.set_password("Adonis1234@")
             user.save()
-            print("otp sent")
-            print("phone number is ",phone,user_name)
+
             return redirect('verifyotp',phone=phone)
         #return render(request,'accounts/verifyotp.html',{"phone_number":phone,"otp":otp, "username":user_name})
     return render(request,'accounts/login.html')
@@ -73,11 +45,11 @@ def send_otp(request):
 def verify_otp(request,phone):
     try:
         User.objects.get(phone_number=phone)
-        print('found')
+
     except Exception as e:
             return redirect('login')
     phone_num=str(phone)
-    print("hi")
+
     count=0
     #if 'verifyotp' in request.POST:
     #if request.POST.get("verifyotp"):
@@ -94,32 +66,16 @@ def verify_otp(request,phone):
         else:
             print("invalid otp")
             messages.info(request, 'Invalid OTP!')
-            # obj=User.objects.get(phone_number=phone)
-            # obj.delete()
         
     return render(request,'accounts/verifyotp.html')
-
-    
-# def dashbord(request,phone):
-#     try:
-#         User.objects.get(phone_number=phone)
-#         print('not found')
-#     except Exception as e:
-#             return redirect('login')
-#     print("inside dashbord")
-#     if request.method=='POST':
-#         print("inside dashbord  post function")
-#         date_today =str(date.today())
-#         date_str=date_today[0]+date_today[1]+date_today[2]+date_today[3]+date_today[5]+date_today[6]+date_today[8]+date_today[9]
-#         print(date_str)
-#         return redirect('booking',phone,date_str)
-#     context={"phone":phone}
-#     return render(request,'accounts/dashbord.html',context)
-    
 def dashbord(request,phone):
     try:
         User.objects.get(phone_number=phone)
-        print('not found')
+        print('not 1234'
+              '121323e23dqwdxwqdx          '
+              ''
+              ''
+              'd')
     except Exception as e:
             return redirect('login')
     print("inside dashbord")
@@ -179,28 +135,22 @@ def bookingconfirm(request,phone,id):
             f.is_booked=True 
             f.save()
             send_confirmation(p,f)
-        
-            # url = "https://2factor.in/API/R1/"
 
-            # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
-            # headers = {}
-
-            # response = requests.request("POST", url, headers=headers, data=payload)
-            try:
-                account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-                auth_token ='449fa052023cef80aa7a4e78d75861ee'
-                client = Client(account_sid, auth_token)
-
-                message = client.messages.create(
-                                            body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-                                            from_='+1 205 691 3855',
-                                            to='+918625877270'
-                                            )
-                messages.info(request, 'Booking Successfull!')
-                print(message.sid)
-                return redirect('booked',phone)
-            except Exception as e:
-                return redirect('booked',phone)
+            # try:
+            #     account_sid ='AC185bf5a96805805d856a9361b586bb5f'
+            #     auth_token ='449fa052023cef80aa7a4e78d75861ee'
+            #     client = Client(account_sid, auth_token)
+            #
+            #     message = client.messages.create(
+            #                                 body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
+            #                                 from_='+1 205 691 3855',
+            #                                 to='+918625877270'
+            #                                 )
+            #     messages.info(request, 'Booking Successfull!')
+            #     print(message.sid)
+            #     return redirect('booked',phone)
+            # except Exception as e:
+            return redirect('booked',phone)
         else:
             return redirect('already_booked',phone)
         
@@ -229,31 +179,17 @@ def cancelconfirm(request,phone,id):
         f=booking_info.objects.get(id=id)
         print(f.slot_time)
         p=User.objects.get(phone_number=phone)
-        f.phone_no_registered=NULL
-        f.is_booked=False 
+        f.phone_no_registered= ""
+        f.is_booked=False
+        send_cancel_confirmation(p, f)
         f.save()
-        # send_confirmation(p,f)
-        # # url = "https://2factor.in/API/R1/"
-
-        # # payload='module=TRANS_SMS&apikey=7e825d24-XXXX-XXXX-XXXX-0200cd936042&to={phone}&from=HEADER&msg=DLT%20Approved%20Message%20Text%20Goes%20Here'
-        # # headers = {}
-
-        # # response = requests.request("POST", url, headers=headers, data=payload)
-        # account_sid ='AC185bf5a96805805d856a9361b586bb5f'
-        # auth_token ='4b53a4c3bc0426e132cad5ca18922608'
-        # client = Client(account_sid, auth_token)
-
-        # message = client.messages.create(
-        #                             body='Hi '+ p.username +' you have booked '+f.ground_name + ' at '+ f.slot_time +' on ' + str(f.date) + '. Thankyou ',
-        #                             from_='+12056913855',
-        #                             to='+918625877270'
-        #                             )
-
-        # print(message.sid)
-
-
-        return redirect('dashbord',phone)
+        return redirect('canceled',phone)
     f=booking_info.objects.get(id=id)
     p=User.objects.get(phone_number=phone)
     context={"booking_info": f ,"user_info":p}
     return render(request,'accounts/cancelconfirm.html',context)
+
+
+def canceled(request,phone):
+    context={'phone':phone}
+    return render(request,'accounts/canceled.html',context)

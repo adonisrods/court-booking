@@ -26,5 +26,6 @@ urlpatterns = [
     re_path(r'^bookingconfirm/(?P<phone>\d+)/(?P<id>\d+)/',bookingconfirm,name="bookingconfirm"),
     re_path(r'^cancelconfirm/(?P<phone>\d+)/(?P<id>\d+)/',cancelconfirm,name="cancelconfirm"),
     re_path(r'^booked/(?P<phone>\d+)/',booked,name="booked"),
-    re_path(r'^already_booked/(?P<phone>\d+)/',already_booked,name="already_booked")
+    re_path(r'^already_booked/(?P<phone>\d+)/',already_booked,name="already_booked"),
+    re_path(r'^canceled/(?P<phone>\d+)/',canceled,name="canceled"),
 ]

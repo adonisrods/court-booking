@@ -33,12 +33,12 @@ from twilio.rest import Client
 def send_confirmation(self,p,f):
     print("inside conriemation task")
     print(p.phone_number)
+    print(p.email)
     print(f.slot_time)
-    #user=User.objects.get(phone=date.today())
     mail_subject = "Hi! "+ p.username +", you have booked "+ f.ground_name +" at "+ f.slot_time
     print(mail_subject)
     message = "Booking successfull"+p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
-    to_email = 'adonistheas@gmail.com'
+    to_email = str(p.email)
     send_mail(
         subject = mail_subject,
         message=message,
@@ -48,6 +48,28 @@ def send_confirmation(self,p,f):
     )
 
     return "sent to registered"
+
+@shared_task(bind=True)
+def send_cancel_confirmation(self,p,f):
+    print("inside conriemation task")
+    print(p.phone_number)
+    print(p.email)
+    print(f.slot_time)
+    mail_subject = "Hi! "+ p.username +", you have booked "+ f.ground_name +" at "+ f.slot_time + " is canceled"
+    print(mail_subject)
+    message = "Booking Canceled"+p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
+    to_email = str(p.email)
+    send_mail(
+        subject = mail_subject,
+        message=message,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[to_email],
+        fail_silently=True,
+    )
+
+    return "sent to registered"
+
+
 
 @shared_task(bind=True)
 def send_mail_to_booked(self,name=None):
