@@ -152,8 +152,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER ='adonis.virtualwebs@gmail.com'
-EMAIL_HOST_PASSWORD = "qbpjvcjfnsyimbcl"
+EMAIL_HOST_USER ='futbook.bookings@gmail.com'
+EMAIL_HOST_PASSWORD = "wccfelkblextrtte"
 DEFAULT_FROM_EMAIL = 'Celery <adonis.virtualwebs@gmail.com>'
 
 
