@@ -9,6 +9,8 @@ from django.contrib import messages
 from accounts.tasks import send_confirmation,send_cancel_confirmation
 # Create your views here.
 from datetime import date
+import datetime
+import calendar
 @api_view(['GET', 'POST'])
 def send_otp(request):
     if request.method=='POST':
@@ -71,11 +73,7 @@ def verify_otp(request,phone):
 def dashbord(request,phone):
     try:
         User.objects.get(phone_number=phone)
-        print('not 1234'
-              '121323e23dqwdxwqdx          '
-              ''
-              ''
-              'd')
+
     except Exception as e:
             return redirect('login')
     print("inside dashbord")
@@ -112,7 +110,14 @@ def booking(request,phone,ground_name,date=date.today()):
         is_book="available"
     else:
         is_book="Not Available"
-    context={'current_date':date_manipulated,"previous_date":prev_date,"next_date":next_date,"today_date":ttoday,'status': Slot_Details, "phone":phone, "ground_name":ground_name}
+
+    def findDay(date):
+        born = datetime.datetime.strptime(date, '%Y %m %d').weekday()
+        return (calendar.day_name[born])
+
+    date_str = date_manipulated.replace("-", " ")
+    curr_day=findDay(date_str)
+    context={'current_date':date_manipulated,"previous_date":prev_date,"next_date":next_date,"today_date":ttoday,'status': Slot_Details, "phone":phone, "ground_name":ground_name, 'current_day':curr_day}
     
     return render(request,'accounts/booking.html',context)
 
