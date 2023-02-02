@@ -38,21 +38,7 @@
           <a class="btn btn-info right mr-2" href="{% url 'booking' phone ground_name today_date %}"> <b>Today</b> </a>
           <a class="btn btn-info right mr-2" href="{% url 'booking' phone ground_name next_date %}"> <b>Next >></b> </a>
         </div>
-        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-        <script>
-          $( function() {
-            $( "#datepicker" ).datepicker();
-          } );
-          </script> 
-        <p>Date: <input type="text" id="datepicker"></p>
-        <form name="login" method="post" action=""> 
-          <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-primary me-2"><b>check</b></button>
-          <a class="card-text" href="/booking/{{date}}" ><button class="btn btn-outline-info me-2" type="button">Book Simpliz Turf</button></a> 
-          {% csrf_token %}   
-          </form> -->
+
        <br>
       <div class="d-flex justify-content-center" style="font-family:'Andale Mono', 'monospace';"><b><h5>{{ current_date }}</h5></b></div>
     <div class="d-flex justify-content-center" style="font-family:'Andale Mono', 'monospace';"><b><h6>{{ current_day }}</h6></b></div>
@@ -86,8 +72,9 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
 }
 
     </style>
-   <div class="box" id="one" style="box-shadow: rgba(130, 138, 130, 0.346) 3px 3px 20px 12px; ;writing-mode: vertical-lr; text-orientation: sideways-right; font-size:large;"> Note: The duration is 1 hour.</div>
-  <table class="table  text-center ">
+    <div class="table-responsive">
+   <div class="box" id="one" style="box-shadow: rgba(130, 138, 130, 0.346) 1px 1px 10px 5px; ;writing-mode: vertical-lr; text-orientation: sideways-right; font-size:medium;"> Note: The duration is 1 hour.</div>
+  <table class="table  text-center table-sm table-hover">
     <thead bgcolor="#0dcaf0">
       <tr >
         <th scope="col" ><h3></h3>SLOT</th>
@@ -97,7 +84,7 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
       </tr>
     </thead>
     {% for i in status%}
-    <tbody class="table-dark" style="box-shadow: rgba(58, 58, 58, 0.133) 3px 3px 20px 12px;">
+    <tbody class="table-dark" style="box-shadow: rgba(58, 58, 58, 0.133) 2px 2px 10px 7px;">
       <tr>
         
 
@@ -111,7 +98,8 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
 
           {% elif i.phone_no_registered == phone  %}
             <a class="card-text" href="/cancelconfirm/{{phone}}/{{i.id}}" ><button class="btn btn-outline-danger me-2" type="button">Cancel</button></a>
-           {% else %}
+
+          {% else %}
           <h5>Not Available</h5>
           
           {% endif %}
@@ -126,7 +114,11 @@ background-color: var(--stripe);" class="card bg-glass " style="color: blueviole
 
     </tbody>
   </table>
+
       </ul>
+    </div>
+  </div>
+</div>>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
   </body>
 </html>
