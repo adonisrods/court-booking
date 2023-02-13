@@ -11,19 +11,37 @@ from accounts.tasks import send_confirmation,send_cancel_confirmation
 from datetime import date
 import datetime
 import calendar
+
 @api_view(['GET', 'POST'])
-def send_otp(request):
+def login(request):
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        phone = request.POST.get('phone_number')
+        email = request.POST.get('email')
+        if User.objects.filter(phone_number=phone).exists() and User.objects.get(
+                phone_number=phone).is_phone_verified == True:
+            return redirect('dashbord', phone)
+
+
+
+        else:
+
+
+            return redirect('sign_up')
+        # return render(request,'accounts/verifyotp.html',{"phone_number":phone,"otp":otp, "username":user_name})
+    return render(request, 'accounts/login.html')
+@api_view(['GET', 'POST'])
+def sign_up(request):
     if request.method=='POST':
         user_name = request.POST.get('username')
         phone = request.POST.get('phone_number')
         email = request.POST.get('email')
         if User.objects.filter(phone_number=phone).exists() and User.objects.get(phone_number=phone).is_phone_verified==True:
-            return redirect('dashbord',phone)
-            
-            
-            
+            print("already registered")
+            return redirect('login')
+
         else:
-            otp_in=send_otp_to_email(phone)
+            otp_in=send_otp_to_email(email)
             try:
                 user = User.objects.create_user(
                 username= user_name,
@@ -32,16 +50,17 @@ def send_otp(request):
                 otp=otp_in
 
             )
+            #please try again
             except Exception as e:
                 user=User.objects.get(phone_number=phone)
                 user.delete()
-                return redirect('login')
+                return redirect('sign_up')
             user.set_password("Adonis1234@")
             user.save()
 
             return redirect('verifyotp',phone=phone)
         #return render(request,'accounts/verifyotp.html',{"phone_number":phone,"otp":otp, "username":user_name})
-    return render(request,'accounts/login.html')
+    return render(request,'accounts/sign__up.html')
 
 @api_view(['GET', 'POST'])
 def verify_otp(request,phone):
@@ -72,7 +91,13 @@ def verify_otp(request,phone):
     return render(request,'accounts/verifyotp.html')
 def dashbord(request,phone):
     try:
-        User.objects.get(phone_number=phone)
+        if User.objects.get(phone_number=phone) and User.objects.get(phone_number=phone).is_phone_verified==True:
+            print("verified")
+        else:
+            print("not verified")
+            user = User.objects.get(phone_number=phone)
+            user.delete()
+            return redirect('sign_up')
 
     except Exception as e:
             return redirect('login')

@@ -51,8 +51,50 @@
 
               
               <h4 class="card-title text-white  " style="font-family:  serif"  >Hello {{user_info.username}},<br> </h4>
-              
-              <p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 hrs on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p>
+
+               {% if booking_info.slot_time == "6"  %}
+          <th scope="row" style=" padding-top: 2px;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p> </b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "7"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "8"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "9"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "10"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "11"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "12"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 AM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p></b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 500</h6></th>
+        {% elif booking_info.slot_time == "13"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 01:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "14"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 02:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "15"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 03:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "16"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 04:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "17"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 05:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "18"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 06:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "19"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 07:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "20"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 08:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "21"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 09:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "22"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 10:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+        {% elif booking_info.slot_time == "23"  %}
+          <th scope="row" style=" padding-top: 2px ;"><h5 style=" font-size:19px; margin-bottom:0"><b><p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot 11:00 PM on {{booking_info.date}} at "{{booking_info.ground_name}}?"</b></h5><h6 style="font-size:13px; margin-bottom:0; font-family: Courier New; color:#C5F0F2;">Rs 1000</h6></th>
+
+        {% else %}
+
+         {% endif %}
+
+
+              <!--<p class="card-text text-white" ><h5 class="text-white">Are you sure you want to reserve Slot {{booking_info.slot_time}}:00 hrs on {{booking_info.date}} at "{{booking_info.ground_name}}?"</h5></p>-->
               <form name="login" method="post" action=""> 
                 <a href="javascript:history.back()" class="btn btn-outline-danger me-2">back</a>
                 <button type="submit" name="sendotp" value="sendotp" class="btn btn-outline-info me-2">Confirm Booking</button>

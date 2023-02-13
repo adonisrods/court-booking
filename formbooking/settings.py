@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-g_so0-=o%yp55b=ch)amgw1o@b#m6chb!$00vnpg^95q=&tqvn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['192.168.29.234']
 
 
 # Application definition
@@ -153,7 +153,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER ='futbook.bookings@gmail.com'
-EMAIL_HOST_PASSWORD = "wccfelkblextrtte"
-DEFAULT_FROM_EMAIL = 'Celery <adonis.virtualwebs@gmail.com>'
+EMAIL_HOST_PASSWORD = "jzuqkvwfknaipkky"
+
 
 

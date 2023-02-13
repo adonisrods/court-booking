@@ -22,18 +22,19 @@ def send_otp_to_email(email):
         print("otp is",otp)
         message = "Hi use the OTP: " + str(otp) + " to verify your account"
         mail_subject = "Hi! OTP verification for futbook"
-        to_email = 'rodriguesadonis25@gmail.com'
-        print("trying to send mail")
+        to_email = email
+
+
         #send_mail('Mail Subject', 'Mail content', settings.EMAIL_HOST_USER, ['rodriguesadonis25@gmail.com'], fail_silently=False)
         send_mail(
             subject=mail_subject,
             message=message,
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[to_email],
-            fail_silently=False,
+            fail_silently=True,
 
         )
-        print("sent mail successfully")
+
 
         return otp
     except Exception as e:

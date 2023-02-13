@@ -18,8 +18,9 @@ from django.urls import path, re_path
 from accounts.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',send_otp,name="login"),
-    path('',send_otp),
+    path('login/',login,name="login"),
+    path('',login,name="login"),
+    path('signup',sign_up,name="sign_up"),
     re_path(r'^verifyotp/(?P<phone>\d+)/',verify_otp,name="verifyotp"),
     re_path(r'^dashbord/(?P<phone>\d+)/',dashbord, name="dashbord"),
     re_path(r'^booking/(?P<phone>\d+)/(?P<ground_name>\D+)/(?P<date>\d+)/',booking,name="booking"),
