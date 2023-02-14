@@ -384,12 +384,12 @@
             <h7 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';font-size: 22px;" > &nbsp; Booking WebSite</h7>
           </a>
           <div class="d-flex flex-row-reverse">
-            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger me-2 " type="button">Logout</button></a></div>
+            <div class="p-2" style="color:rgb(177, 228, 235);"><a href="/login/"> <button class="btn btn-outline-danger  " type="button">Logout</button></a></div>
             <div class="p-2" style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235);"><h5 style="color:rgb(177, 228, 235); font-family: 'Alegreya Sans SC';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{phone}}</h5></div>
           </div>
           
         </div>
-        </div>
+
       </nav>
       </div>
      <br>
@@ -399,147 +399,112 @@
       <div class="d-flex justify-content-center">
       <div class="row row-cols-1 row-cols-md-1 g-4 px-4 py-2 px-md-5 " >
         <div class="col"></div>
-          <div class="card mb-3 text-center animate fadeInRight one " style="max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #0d6efd; box-shadow: rgba(9, 9, 9, 0.190) 3px 3px 20px 12px; ">
+          <div class="card mb-3 text-center animate fadeInRight one " style="max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #00bdfd; box-shadow: rgba(9, 9, 9, 0.190) 3px 3px 20px 12px; ">
             <div class="row g-0" >
               <div class="col-md-4" >
                 <br>
                 <br>
                 {% load static %}
-                <img src="{% static 'simpliz_turf.png' %}" alt="Simpliz Turf" class="img-fluid rounded-start img-responsive" style="min-height: 3cm;min-width: 3.5cm;">
+                <img src="/accounts/static/simpliz_turf.png" alt="Simpliz Turf" class="img-fluid rounded-start img-responsive" style="min-height: 3.2cm;min-width: 3.7cm; margin-bottom:10px;">
                 <!-- <img src="https://www.pexels.com/search/background%20image/" class="img-fluid rounded-start" alt="..."> -->
               </div>
               <div class="col-md-8">
               <div class="card-body">
               <h5 class="card-title " style="color:#e1e1e1">SIMPLIZ TURF</h5>
-              <p class="card-text" style="color:#e1e1e1">Bookings for Simpliz Turf. Located at Chandor,salcette Goa.</p>
-              
-              <a class="btn btn-outline-info me-2" href="{% url 'booking' phone ground_name1 date_today  %}"><b>Book Simpliz Turf</b></a>
+              <p class="card-text" style="color:#e1e1e1; margin-bottom:2px">Located at Chandor, South-Goa, Goa.</p>
+              <a href="https://www.google.com/maps/place/Simpliz+Turf/@15.2641235,74.029818,17z/data=!3m1!4b1!4m5!3m4!1s0x3bbfad3884ce8001:0x41eb16e18a2f23ce!8m2!3d15.2641235!4d74.0320067" style="color:white;margin-bottom:4px">View in Maps</a>
+              <br>
+                  <a class="btn btn-outline-info " href="{% url 'booking' phone ground_name1 date_today  %}"><b>Book Simpliz Turf</b></a>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- &nbsp;
-      
-          <div class="card mb-3 text-center " style="max-width: 25rem;background-color: #162937;border-width: 0.08cm;border-color: #0d6efd;">
-            <div class="row g-0" >
-              <div class="col-md-4">
-                <br>
-                <br>
-                {% load static %}
-                <img src="{% static 'simpliz_turf.png' %}" alt="Simpliz Turf" class="img-fluid rounded-start img-responsive" style="min-height: 3cm;min-width: 3.5cm;">
-                 <img src="https://www.pexels.com/search/background%20image/" class="img-fluid rounded-start" alt="..."> 
-              </div>
-              <div class="col-md-8">
-              <div class="card-body">
-              <h5 class="card-title " style="color:#e1e1e1">SIMPLIZ TURF</h5>
-              <p class="card-text" style="color:#e1e1e1">Bookings for Test. Located at Test,salcette Goa.</p>
-              <a class="btn btn-outline-primary me-2" href="{% url 'booking' phone ground_name2 date_today  %}"><b>Book Test</b></a>
-            </div>
-          </div> -->
+
             </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
-<script>
-$("#fixed-form-container .body").hide();
-$("#fixed-form-container .button").click(function ()
-    {
-        $(this).next("#fixed-form-container div").slideToggle(400);
-        $(this).toggleClass("expanded");
-    });
-</script>
-<style>
+</div>
 
-#fixed-form-container{
-    position: fixed;
-    bottom: 0px;
-    left: 3%;
-    width: 94%;
-    text-align: center;
-    margin: 0;
+  <style>
+            #contact-container {
+                position: fixed;
+                bottom: 20px;
+                left: 10px;
 
-}
+            }
 
-#fixed-form-container .button:before {
-   content: "+ ";
-}
+            #contact-button {
+                padding: 0px;
+                border: none;
+                border-radius: 6px;
+                background-color: #373737;
+                color: #fff;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
 
-#fixed-form-container .expanded:before {
-    content: "- ";
-}
+            #contact-button:hover {
+                transform: scale(1.1);
+            }
 
-#fixed-form-container .button {
-  font-size:1.1em;
-	cursor: pointer;
-	margin-left: auto;
-  margin-right: auto;
-	border: 2px solid #e25454;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px 5px 0px 0px;
-	padding: 5px 20px 5px 20px;
-	background-color: #e25454;
-	color: #fff;
-	display: inline-block;
-	text-align: center;
-	text-decoration: none;
-  -webkit-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.3);
-  -moz-box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.3);
-  box-shadow: 4px 0px 5px 0px rgba(0,0,0,0.3);
-}
+            #contact-popup {
+                background-color: #222222;
+                display:flex;
+                position: fixed;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                height: 8%;
+                color:white;
+                border-radius: 10px;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.7s linear;
+            }
 
-#fixed-form-container .body{
-    background-color: #fff;
-    border-radius: 5px;
-    border: 2px solid #e25454;
-    margin-bottom: 16px;
-    padding: 10px;
-    -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
-    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.3);
-}
+            #contact-container.show-popup #contact-popup {
+                visibility: visible;
+                opacity: 1;
+            }
+        </style>
 
-@media only screen and (min-width:768px){
-    #fixed-form-container .button{
-       margin: 0;
+  <div id="contact-container">
+            <button id="contact-button">Contact Us</button>
+            <div id="contact-popup" class="" style="justify-content:space-between">
+                <div style="margin:5px;background-color:#3b3b3b">
+                <h5 style="font-size:1rem;margin:0px; padding:3px;">For support: </h5>
 
-    }
-    #fixed-form-container {
-        left: 20px;
-        width: 390px;
-        text-align: left;
-    }
+                <a href="https://wa.me/+918625877270" style="color:white;padding-top:3px; ">Connect through whatsapp</a>
+                </div>
 
-    #fixed-form-container .body{
-        padding: 30px;
-        border-radius: 0px 5px 5px 5px;
-    }
-}
-</style>
+                <div style="margin:5px; background-color:#3b3b3b">
+                <h5 style="font-size:1rem; margin-bottom:0px;padding:2px;">To register your turf. </h5>
 
+                <h6 style="font-size:1rem; margin-bottom:0px;padding:2px;text-align:right;">Call : 8625877270 </h6>
+                </div>
+            </div>
+        </div>
 
+   <script type="text/javascript">
+            const contactButton = document.getElementById("contact-button");
+                    const contactContainer = document.getElementById("contact-container");
+                    const contactPopup = document.getElementById("contact-popup");
 
-<section id="fixed-form-container">
-	<div class="button">Click Me!</div>
-		<div class="body">
-		 <div class="form-group">
-        <label for="email">Email address:</label>
-          <input type="email" class="form-control" id="email">
-      </div>
-      <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd">
-      </div>
-      <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-</section>
+                    contactButton.addEventListener("click", () => {
+                        contactContainer.classList.toggle("show-popup");
+                    });
 
+                    document.addEventListener("click", (event) => {
+                        console.log(event.target)
+                        if (!contactContainer.contains(event.target) && contactPopup.style.opacity == 0) {
+                            contactContainer.classList.remove("show-popup");
+                        }
+                    });
+        </script>
 
-
-  </body>
+</body>
 </html>
 
 

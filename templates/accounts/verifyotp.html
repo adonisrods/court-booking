@@ -107,6 +107,84 @@
       </div>
     </div>
   </section>
+
+ <style>
+            #contact-container {
+                position: fixed;
+                bottom: 20px;
+                left: 10px;
+
+            }
+
+            #contact-button {
+                padding: 0px;
+                border: none;
+                border-radius: 6px;
+                background-color: #373737;
+                color: #fff;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+
+            #contact-button:hover {
+                transform: scale(1.1);
+            }
+
+            #contact-popup {
+                background-color: #222222;
+                display:flex;
+                position: fixed;
+                width: 100%;
+                bottom: 0;
+                left: 0;
+                height: 10%;
+                color:white;
+                border-radius: 10px;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.7s linear;
+            }
+
+            #contact-container.show-popup #contact-popup {
+                visibility: visible;
+                opacity: 1;
+            }
+        </style>
+
+  <div id="contact-container">
+            <button id="contact-button">Contact Us</button>
+            <div id="contact-popup" class="" style="justify-content:space-between">
+                <div style="margin:5px;background-color:#3b3b3b">
+                <h5 style="font-size:1rem;margin:0px; padding:3px;">For support: </h5>
+
+                <a href="https://wa.me/+918625877270" style="color:white;padding-top:3px;font-size:15px ">Connect through whatsapp</a>
+                </div>
+
+                <div style="margin:5px; background-color:#3b3b3b">
+                <h6 style="font-size:1rem; margin-bottom:0px;padding:2px;">To register your turf. </h6>
+
+                <h6 style="font-size:1rem; margin-bottom:0px;padding:2px;text-align:right;">Call : 8625877270 </h6>
+                </div>
+            </div>
+        </div>
+
+   <script type="text/javascript">
+            const contactButton = document.getElementById("contact-button");
+                    const contactContainer = document.getElementById("contact-container");
+                    const contactPopup = document.getElementById("contact-popup");
+
+                    contactButton.addEventListener("click", () => {
+                        contactContainer.classList.toggle("show-popup");
+                    });
+
+                    document.addEventListener("click", (event) => {
+                        console.log(event.target)
+                        if (!contactContainer.contains(event.target) && contactPopup.style.opacity == 0) {
+                            contactContainer.classList.remove("show-popup");
+                        }
+                    });
+        </script>
 </body>
 </html>
   <!-- Section: Design Block -->
