@@ -37,7 +37,7 @@ def send_confirmation(self,p,f):
     print(f.slot_time)
     mail_subject = "Hi! "+ p.username +", you have booked "+ f.ground_name +" at "+ f.slot_time
     print(mail_subject)
-    message = "Booking successfull"+p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
+    message = "Booking successfull " +p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
     to_email = str(p.email)
     send_mail(
         subject = mail_subject,
