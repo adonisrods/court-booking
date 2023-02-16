@@ -31,21 +31,18 @@ from twilio.rest import Client
 #sends mail to the user who has his birthday Today
 @shared_task(bind=True)
 def send_confirmation(self,p,f):
-    print("inside conriemation task")
-    print(p.phone_number)
-    print(p.email)
-    print(f.slot_time)
+    print("inside confirmation task")
     mail_subject = "Hi! "+ p.username +", you have booked "+ f.ground_name +" at "+ f.slot_time
-    print(mail_subject)
-    message = "Booking successfull " + p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +":00 Hrs" +" date:"+ str(f.date)
+    message = "Booking successfull " + p.username + " phone:"+p.phone_number+ ", you have BOOKED "+ f.ground_name +" at "+ f.slot_time +":00 Hrs" +" date:"+ str(f.date)
     to_email = str(p.email)
     send_mail(
-        subject = mail_subject,
+        subject=mail_subject,
         message=message,
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[to_email],
         fail_silently=True,
     )
+
 
     return "sent to registered"
 
@@ -55,9 +52,9 @@ def send_cancel_confirmation(self,p,f):
     print(p.phone_number)
     print(p.email)
     print(f.slot_time)
-    mail_subject = "Hi! "+ p.username +", you have booked "+ f.ground_name +" at "+ f.slot_time + " is canceled"
+    mail_subject = "Hi! "+ p.username +", you have CANCELED"+ f.ground_name +" at "+ f.slot_time + " is canceled"
     print(mail_subject)
-    message = "Booking Canceled"+p.username + " phone:"+p.phone_number+ ", you have booked "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
+    message = "Booking Canceled"+p.username + " phone:"+p.phone_number+ ", you have CANCELED "+ f.ground_name +" at "+ f.slot_time +" date:"+ str(f.date)
     to_email = str(p.email)
     send_mail(
         subject = mail_subject,
