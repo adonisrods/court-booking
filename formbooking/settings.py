@@ -148,12 +148,17 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # SMTP Settings FOR Email Host
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = True
-EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = "smtp.sendgrid.net"
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER ='adonis.cycatz@gmail.com'
+# EMAIL_HOST_PASSWORD = "ialyawgayelqtxxn"
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
-EMAIL_HOST_USER ='adonis.cycatz@gmail.com'
-EMAIL_HOST_PASSWORD = "ialyawgayelqtxxn"
+EMAIL_USE_TLS = True
 
 
 
